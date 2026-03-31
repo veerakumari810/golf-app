@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { supabase } from './supabaseClient'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
@@ -14,7 +13,6 @@ function App() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
-      // Hardcode admin check for now
       if (session?.user?.email === 'veerakumari123@gmail.com') {
         setIsAdmin(true)
       }
@@ -32,27 +30,14 @@ function App() {
     return () => subscription.unsubscribe()
   }, [])
 
+  // Show login page if no session
   if (!session) {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </BrowserRouter>
-    )
+    return <Login />
   }
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/dashboard" />} />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-      </Routes>
-    </BrowserRouter>
-  )
+  // Show dashboard for regular users, admin panel for admins
+  // You can add a navigation menu later
+  return <Dashboard />
 }
 
 export default App
