@@ -8,35 +8,38 @@ import './App.css'
 
 function App() {
   const [session, setSession] = useState(null)
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [showLogin, setShowLogin] = useState(true)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
-      if (session?.user?.email === 'veerakumari123@gmail.com') {
-        setIsAdmin(true)
-      }
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
-      if (session?.user?.email === 'veerakumari123@gmail.com') {
-        setIsAdmin(true)
-      } else {
-        setIsAdmin(false)
-      }
     })
 
     return () => subscription.unsubscribe()
   }, [])
 
-  // Show login page if no session
   if (!session) {
-    return <Login />
+    return (
+      <div className="auth-container">
+        {showLogin ? (
+          <>
+            <Login />
+            <button onClick={() => setShowLogin(false)}>Need an account? Sign Up</button>
+          </>
+        ) : (
+          <>
+            <Signup />
+            <button onClick={() => setShowLogin(true)}>Already have an account? Login</button>
+          </>
+        )}
+      </div>
+    )
   }
 
-  // Show dashboard for regular users, admin panel for admins
-  // You can add a navigation menu later
   return <Dashboard />
 }
 
