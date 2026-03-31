@@ -10,59 +10,27 @@ import './App.css'
 function App() {
   const [session, setSession] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
-      if (session?.user) {
-        checkIfAdmin(session.user.id)
-      } else {
-        setLoading(false)
+      // Hardcode admin check for now
+      if (session?.user?.email === 'veerakumari123@gmail.com') {
+        setIsAdmin(true)
       }
     })
 
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
-      if (session?.user) {
-        checkIfAdmin(session.user.id)
+      if (session?.user?.email === 'veerakumari123@gmail.com') {
+        setIsAdmin(true)
       } else {
         setIsAdmin(false)
-        setLoading(false)
       }
     })
 
     return () => subscription.unsubscribe()
   }, [])
-
-  const checkIfAdmin = async (userId) => {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('id', userId)
-        .single()
-      
-      if (error) {
-        console.error('Error checking admin:', error)
-        setIsAdmin(false)
-      } else {
-        setIsAdmin(data?.is_admin === true)
-      }
-    } catch (err) {
-      console.error('Admin check failed:', err)
-      setIsAdmin(false)
-    }
-    setLoading(false)
-  }
-
-  if (loading) {
-    return <div className="loading">Loading...</div>
-  }
 
   if (!session) {
     return (
@@ -81,8 +49,6 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/dashboard" />} />
-        <Route path="/login" element={<Navigate to="/dashboard" />} />
-        <Route path="/signup" element={<Navigate to="/dashboard" />} />
         <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
     </BrowserRouter>
