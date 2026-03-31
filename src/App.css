@@ -1,0 +1,50 @@
+.dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.stats {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.quick-add button {
+  margin: 5px;
+  padding: 10px;
+}
+
+.scores-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scores-list th, .scores-list td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.login-form, .signup-form input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
