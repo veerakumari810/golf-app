@@ -1,12 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+// Hardcoded for production deployment
+const supabaseUrl = 'https://cnjvhomxmbbokdskgeco.supabase.co'
+const supabaseAnonKey = 'sb_publishable_is8DKsF2MZPKrUAgBrK93g_8CSkhqek'
 
-console.log('Supabase URL:', supabaseUrl) // Check if this shows your actual URL
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase credentials! Check your .env file')
-}
+console.log('Supabase URL:', supabaseUrl)
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
