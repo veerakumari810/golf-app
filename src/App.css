@@ -7,18 +7,49 @@
   align-items: center;
 }
 
+.nav-bar h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.nav-bar div {
+  display: flex;
+  gap: 10px;
+}
+
 .nav-bar button {
   background: #4CAF50;
   color: white;
   border: none;
   padding: 8px 16px;
-  margin-left: 10px;
+  margin-left: 0;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .nav-bar button:hover {
   background: #45a049;
+  transform: translateY(-1px);
+}
+
+/* Admin button special style */
+.nav-bar .admin-btn {
+  background: #ff9800;
+}
+
+.nav-bar .admin-btn:hover {
+  background: #f57c00;
+}
+
+/* Sign Out button style */
+.nav-bar button:last-child {
+  background: #dc3545;
+}
+
+.nav-bar button:last-child:hover {
+  background: #c82333;
 }
 
 .switch-btn {
@@ -27,10 +58,19 @@
   border: none;
   color: #4CAF50;
   cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
 }
 
+.switch-btn:hover {
+  text-decoration: underline;
+}
+
+/* Admin Panel Styles */
 .admin-panel {
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .admin-card {
@@ -38,15 +78,227 @@
   padding: 20px;
   margin: 20px 0;
   border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admin-card h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
 }
 
 .admin-card table {
   width: 100%;
   border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.admin-card th, .admin-card td {
+.admin-card th, 
+.admin-card td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   text-align: left;
+}
+
+.admin-card th {
+  background: #4CAF50;
+  color: white;
+  font-weight: 600;
+}
+
+.admin-card tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.admin-card tr:hover {
+  background: #f0f0f0;
+}
+
+/* Loading spinner */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Dashboard styles */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.stats {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.stats h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.stats p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.quick-add {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.quick-add button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quick-add button:hover {
+  background: #45a049;
+}
+
+.scores-list {
+  background: white;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.scores-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scores-list th,
+.scores-list td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.scores-list th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.scores-list button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.scores-list button:first-child {
+  background: #28a745;
+}
+
+.scores-list button:last-child {
+  background: #dc3545;
+}
+
+/* Auth container styles */
+.auth-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.auth-container button[type="submit"] {
+  width: 100%;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-container button[type="submit"]:hover {
+  background: #45a049;
+}
+
+.error {
+  color: #dc3545;
+  margin: 10px 0;
+}
+
+.success {
+  color: #28a745;
+  margin: 10px 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .nav-bar div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .admin-card table,
+  .scores-list table {
+    font-size: 12px;
+  }
+  
+  .admin-card th,
+  .admin-card td,
+  .scores-list th,
+  .scores-list td {
+    padding: 8px;
+  }
+  
+  .quick-add button {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
 }
